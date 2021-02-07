@@ -1,5 +1,5 @@
 import './App.css';
-import  React, { useState } from 'react';
+import React, { useState } from 'react';
 import CSVloader from "./CSVloader";
 import StocksTable from "./StocksTable";
 
@@ -8,6 +8,8 @@ export default function App() {
   const [stocks, setStocks] = useState([]);
   const [csvTitles, setCsvTitles] = useState([]);
   const [loading, setLoading] = useState(true);
+
+
 
   return (
     <div className="App">

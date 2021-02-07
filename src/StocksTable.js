@@ -1,4 +1,4 @@
-import  React from 'react';
+import React from 'react';
 import './StocksTable.css';
 
 export default function StocksTable({stocks, csvTitles}) {

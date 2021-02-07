@@ -1,4 +1,4 @@
-import  React, { useState } from 'react';
+import React, { useState } from 'react';
 import './CSVLoader.css';
 
 export default function CSVloader({importFileContents, setCsvTitles, setLoading}) {
