@@ -1,6 +1,7 @@
 import  React, { useState } from 'react';
+import './CSVLoader.css';
 
-export default function CSVloader({importFileContents, setCsvTitles}) {
+export default function CSVloader({importFileContents, setCsvTitles, setLoading}) {
 
   const [csvFile, setCsvFile] = useState(null);
 
@@ -10,10 +11,12 @@ export default function CSVloader({importFileContents, setCsvTitles}) {
 
   function loadFile() {
     if (csvFile) {
+      setLoading(true);
       const reader = new FileReader();
 
       reader.onerror = function(event) {
         alert('An error occurred. Please try again.')
+        setLoading(false);
       };
 
       reader.onload = readFile;
@@ -34,8 +37,10 @@ export default function CSVloader({importFileContents, setCsvTitles}) {
       }
       importFileContents(results);
       setCsvTitles(csv_titles);
+      setLoading(false);
     } else {
       alert('Something went wrong, please try again.')
+      setLoading(false);
     }
   }
 
