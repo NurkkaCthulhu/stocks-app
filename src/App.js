@@ -1,7 +1,7 @@
-import './App.css';
 import React, { useState } from 'react';
-import CSVloader from "./CSVloader";
-import StocksTable from "./StocksTable";
+import CSVloader from "./components/CSVloader.js";
+import StocksTable from "./components/StocksTable.js";
+import './css/App.css';
 
 export default function App() {
 
