@@ -7,8 +7,8 @@ export default function App() {
 
   const [stocks, setStocks] = useState([]);
   const [csvTitles, setCsvTitles] = useState([]);
-  const [loading, setLoading] = useState(true);
-
+  const [loading, setLoading] = useState(false);
+  const [mode, setMode] = useState('table');
 
 
   return (
