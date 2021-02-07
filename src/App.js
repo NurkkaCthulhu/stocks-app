@@ -1,25 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
+import  React, { useState, useEffect } from 'react';
+import CSVloader from "./CSVloader";
+import StocksTable from "./StocksTable";
 
-function App() {
+export default function App() {
+
+  const [stocks, setStocks] = useState([])
+  const [csvTitles, setCsvTitles] = useState([])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Statistics about Stock Prices</h1>
+      <p>This stocks app follows Nasdaq's CSV file specifications. This means that the data should be in the “Date, Close/Last, Volume, Open, High, Low" format. Start exploring stock statistics by loading a CSV file.</p>
+      <CSVloader importFileContents={setStocks} getCSVTitles/>
+      <StocksTable stocks={stocks}/>
     </div>
   );
 }
-
-export default App;
