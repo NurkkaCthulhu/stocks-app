@@ -1,21 +1,43 @@
-import  React, { useState, useEffect } from 'react';
+import  React from 'react';
+import './StocksTable.css';
 
-export default function StocksTable({stocks}) {
+export default function StocksTable({stocks, csvTitles}) {
 
-  const [loading, setLoading] = useState(false)
+  function renderData() {
+    return stocks.map((stock, index) => {
+      stock = stock.split(',')
+      const [ date, close, volume, open, high, low ] = stock;
+      return (
+        <tr key={index}>
+          <td>{date}</td>
+          <td>{close}</td>
+          <td>{volume}</td>
+          <td>{open}</td>
+          <td>{high}</td>
+          <td>{low}</td>
+        </tr>
+      )
+    })
+  }
 
-  if (loading) {
-    return (
-      <div>
-        <h1>Loading stocks...</h1>
-      </div>
-    )
+  function renderTitles() {
+    return csvTitles.map((key, index) => {
+      return (
+        <th key={index}>{key.toUpperCase()}</th>
+      )
+    })
   }
 
   return (
-    <div id="stocks-table">
-      <p>Stocks Table</p>
-      <p>{stocks[0]}</p>
+    <div>
+      <table id="stocks">
+        <thead>
+          <tr>{renderTitles()}</tr>
+        </thead>
+        <tbody>
+          {renderData()}
+        </tbody>
+      </table>
     </div>
   )
 }
