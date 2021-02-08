@@ -5,18 +5,22 @@ export default function StocksTable({stocks, csvTitles}) {
 
   function renderData() {
     return stocks.map((stock, index) => {
-      stock = stock.split(',')
-      const [ date, close, volume, open, high, low ] = stock;
-      return (
-        <tr key={index}>
-          <td>{date}</td>
-          <td>{close}</td>
-          <td>{volume}</td>
-          <td>{open}</td>
-          <td>{high}</td>
-          <td>{low}</td>
-        </tr>
-      )
+      if (stock !== "") {
+        stock = stock.split(',');
+        const [ date, close, volume, open, high, low ] = stock;
+        return (
+          <tr key={index}>
+            <td>{date}</td>
+            <td>{close}</td>
+            <td>{volume}</td>
+            <td>{open}</td>
+            <td>{high}</td>
+            <td>{low}</td>
+          </tr>
+        )
+      } else {
+        return <tr><td colSpan={6}>No stocks data in the file</td></tr>
+      }
     })
   }
 
@@ -28,16 +32,33 @@ export default function StocksTable({stocks, csvTitles}) {
     })
   }
 
-  return (
-    <div>
+  function renderTable() {
+    return (
       <table id="stocks">
         <thead>
-          <tr>{renderTitles()}</tr>
+        <tr>{renderTitles()}</tr>
         </thead>
         <tbody>
-          {renderData()}
+        {renderData()}
         </tbody>
       </table>
+    )
+  }
+
+  if(stocks.length === 0) {
+    return (
+      <div>
+        <p>No stocks loaded</p>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      {csvTitles[0].length > 0 ? renderTable()
+      :
+        <p>CSV file was empty</p>
+      }
     </div>
   )
 }
