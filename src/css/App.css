@@ -15,8 +15,3 @@
     100% { transform: rotate(360deg); }
 }
 
-.date-picker {
-    display: inline-block;
-    margin-left: 1em;
-    margin-right: 1em;
-}

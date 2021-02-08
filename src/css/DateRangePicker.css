@@ -1,0 +1,10 @@
+.date-picker {
+    display: inline-block;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+#date-selection {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}

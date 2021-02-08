@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import DatePicker from "react-datepicker";
 import CSVloader from "./components/CSVloader.js";
 import StocksTable from "./components/StocksTable.js";
+import DateRangePicker from "./components/DateRangePicker";
 import './css/App.css';
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -18,14 +18,7 @@ export default function App() {
       <h1>Statistics about Stock Prices</h1>
       <p>This stocks app follows Nasdaq's CSV file specifications. This means that the data should be in <br/><i>Date, Close/Last, Volume, Open, High, Low</i><br/>format. Start exploring stock statistics by loading a CSV file.</p>
       <CSVloader importFileContents={setStocks} setCsvTitles={setCsvTitles} setLoading={setLoading}/>
-      <div className="date-picker">
-        <span>Start date</span>
-        <DatePicker selected={startDate} onChange={date => setStartDate(date)} maxDate={endDate}/>
-      </div>
-      <div className="date-picker">
-        <span>End date</span>
-        <DatePicker selected={endDate} onChange={date => setEndDate(date)} minDate={startDate}/>
-      </div>
+      <DateRangePicker startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}/>
       {loading ?
         <div>
           <div className="loader"></div>
