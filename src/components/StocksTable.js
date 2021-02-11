@@ -55,7 +55,7 @@ export default function StocksTable({stocks, csvTitles}) {
 
   return (
     <div>
-      {csvTitles[0].length > 0 ? renderTable()
+      {csvTitles[0]?.length > 0 ? renderTable()
       :
         <p>CSV file was empty</p>
       }

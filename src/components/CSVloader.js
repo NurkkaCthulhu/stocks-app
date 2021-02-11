@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
 import '../css/CSVLoader.css';
 
-export default function CSVloader({importFileContents, setCsvTitles, setLoading}) {
-
+/**
+ *  CSV loader is a reusable component that can be used to load CSV files.
+ *  @param {function(Array[])} exportFileContents - Returns the found CSV file contents to the parent component as an array of data lines.
+ *  @param {function(Array[])} exportCsvTitles    - Returns the found CSV file titles to the parent component as an array of found CSV titles.
+ *  @param {function(boolean)} setLoading         - Sets the page status to loading in the parent component. Accepts boolean values.
+ *  @param {string} [fileHeader=""]               - Defines whether the loaded CSV file should have some predefined header. Default value is "".
+ */
+export default function CSVloader({exportFileContents, exportCsvTitles, setLoading, fileHeader= ""}) {
+  /**
+   * @param csvFile - CSV file that the loader uses.
+   */
   const [csvFile, setCsvFile] = useState(null);
 
   function selectCSV(e) {
@@ -27,16 +36,23 @@ export default function CSVloader({importFileContents, setCsvTitles, setLoading}
 
   function readFile(e) {
     let fileContent = e.target?.result?.split(/\r\n|\r|\n/g);
+    let csv_titles = [];
+    const results = [];
 
     if (fileContent) {
-      const csv_titles = fileContent.splice(0,1)[0].split(',');
-      const results = [];
+      if (fileHeader !== "") {
+        if (fileContent[0] !== fileHeader) {
+          alert("CSV file should have the defined header of " + fileHeader +". This was illegal.")
+          return;
+        }
+        csv_titles = fileContent.splice(0,1)[0].split(',');
+      }
 
       for (let line of fileContent) {
         results.push(line);
       }
-      importFileContents(results);
-      setCsvTitles(csv_titles);
+      exportFileContents(results);
+      exportCsvTitles(csv_titles);
       setLoading(false);
     } else {
       alert('Something went wrong, please try again.')
