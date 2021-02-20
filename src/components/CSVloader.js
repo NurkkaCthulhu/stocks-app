@@ -24,7 +24,7 @@ export default function CSVloader({exportFileContents, exportCsvTitles, setLoadi
       const reader = new FileReader();
 
       reader.onerror = function(event) {
-        alert('An error occurred. Please try again.')
+        alert('An error occurred. Please try again.');
         setLoading(false);
       };
 
@@ -42,7 +42,8 @@ export default function CSVloader({exportFileContents, exportCsvTitles, setLoadi
     if (fileContent) {
       if (fileHeader !== "") {
         if (fileContent[0] !== fileHeader) {
-          alert("CSV file should have the defined header of " + fileHeader +". This was illegal.")
+          alert("CSV file should have the defined header of " + fileHeader +". Please upload a file with the correct header.");
+          setLoading(false);
           return;
         }
         csv_titles = fileContent.splice(0,1)[0].split(',');
@@ -55,7 +56,7 @@ export default function CSVloader({exportFileContents, exportCsvTitles, setLoadi
       exportCsvTitles(csv_titles);
       setLoading(false);
     } else {
-      alert('Something went wrong, please try again.')
+      alert('Something went wrong, please try again.');
       setLoading(false);
     }
   }
