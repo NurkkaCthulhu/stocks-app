@@ -13,7 +13,7 @@ export default function App() {
   const [stocks, setStocks] = useState([]);
   const [csvTitles, setCsvTitles] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [startDate, setStartDate] = useState(new Date(2000, 1, 1));
+  const [startDate, setStartDate] = useState(new Date(2010, 1, 1));
   const [endDate, setEndDate] = useState(new Date());
   const [activeView, setActiveView] = useState("TABLE");
   const stockTitles = "Date, Close/Last, Volume, Open, High, Low";
