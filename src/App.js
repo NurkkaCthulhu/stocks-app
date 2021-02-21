@@ -22,7 +22,8 @@ export default function App() {
     <div className="App">
       <h1>Statistics about Stock Prices</h1>
       <p>This stocks app follows Nasdaq's CSV file specifications. This means that the data should be in <br/>
-      <i>Date, Close/Last, Volume, Open, High, Low</i><br/>format. Start exploring stock statistics by loading a CSV file.</p>
+      <i>Date, Close/Last, Volume, Open, High, Low</i><br/>format and the file should have a header with the same values.
+        Start exploring stock statistics by loading a CSV file.</p>
       <CSVloader exportFileContents={setStocks} exportCsvTitles={setCsvTitles} setLoading={setLoading} fileHeader={stockTitles} />
       <DateRangePicker startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}/>
       <Nav changeViewTo={setActiveView} currentView={activeView} />
