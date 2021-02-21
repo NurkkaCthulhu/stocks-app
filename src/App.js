@@ -32,7 +32,7 @@ export default function App() {
           <p>Loading...</p>
         </div>
         :
-        <QuestionAnswer stocks={stocks} csvTitles={csvTitles} view={activeView}/>
+        <QuestionAnswer stocks={stocks} csvTitles={csvTitles} view={activeView} startDate={startDate} endDate={endDate}/>
       }
     </div>
   );
