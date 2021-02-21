@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Stock from "./Stock";
 
 /**
  *  Answer A answers the question "How many days was the longest bullish (upward) trend within a given date range?"
@@ -7,10 +8,57 @@ import React, { useState } from 'react';
  *  ● Both start and end date shall be included to the date range.
  *  ● Expected output: The max amount of days the stock price was increasing in a row
  */
+
 export default function AnswerA({startDate, endDate, stocks}) {
+  const [bullish, setBullish] = useState(0);
+
+  function calculateBullishTrend() {
+
+    let sortedStocks = [];
+    for (let i = 0; i < stocks.length-1; i++) {
+      let splitStock = stocks[i].split(',');
+      console.log(splitStock[1].substring(2))
+      let oneStock = new Stock(new Date(splitStock[0]), parseFloat(splitStock[1].substring(2)), parseInt(splitStock[2].substring(1)),
+        parseFloat(splitStock[3].substring(2)), parseFloat(splitStock[4].substring(2)), parseFloat(splitStock[5].substring(2)));
+      sortedStocks.push(oneStock);
+    }
+    sortedStocks.sort((a, b) => (a.date > b.date) ? 1 : -1);
+
+    let longestTrend = 0;
+    let currentTrendLength = 0;
+    let lastPrice = sortedStocks[0].close;
+    for (let stock of sortedStocks) {
+      if (stock.date >= startDate && stock.date <= endDate) {
+        console.log("valid päivä")
+        console.log(lastPrice + (" < ") + stock.close);
+        if (stock.close > lastPrice) {
+          console.log(lastPrice + (", ") + stock.close);
+          lastPrice = stock.close;
+          currentTrendLength++;
+          console.log(currentTrendLength)
+        } else {
+          lastPrice = stock.close;
+          if (currentTrendLength > longestTrend) {
+            longestTrend = currentTrendLength;
+          }
+          currentTrendLength = 0;
+        }
+      }
+    }
+    if (currentTrendLength > longestTrend) {
+      longestTrend = currentTrendLength;
+    }
+
+    return (
+      <div id="bullish">
+        <p>LONGEST BULLISH TREND WAS {longestTrend}</p>
+      </div>
+    )
+  }
+
   return (
     <div id="answer-a">
-      <p>Answer A</p>
+      {stocks && calculateBullishTrend()}
     </div>
   )
 }
