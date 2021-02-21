@@ -9,7 +9,7 @@ export default function StocksTable({stocks, csvTitles}) {
         stock = stock.split(',');
         const [ date, close, volume, open, high, low ] = stock;
         return (
-          <tr key={index}>
+          <tr key={index + ("data")}>
             <td>{date}</td>
             <td>{close}</td>
             <td>{volume}</td>
@@ -19,7 +19,8 @@ export default function StocksTable({stocks, csvTitles}) {
           </tr>
         )
       } else {
-        return <tr><td colSpan={6}>No stocks data in the file</td></tr>
+        stock ? console.log(stock) :
+        <tr><td colSpan={6}>No stocks data in the file</td></tr>
       }
     })
   }
@@ -54,7 +55,8 @@ export default function StocksTable({stocks, csvTitles}) {
   }
 
   return (
-    <div>
+    <div id="stocks-table">
+      <p>Table showing all the stocks found in the given CSV file.</p>
       {csvTitles[0]?.length > 0 ? renderTable()
       :
         <p>CSV file was empty</p>
