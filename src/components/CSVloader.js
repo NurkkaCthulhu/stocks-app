@@ -50,7 +50,7 @@ export default function CSVloader({exportFileContents, exportCsvTitles, setLoadi
       }
 
       for (let line of fileContent) {
-        results.push(line);
+        line.length > 0 && results.push(line.replaceAll(/ /g,''));
       }
       exportFileContents(results);
       exportCsvTitles(csv_titles);
