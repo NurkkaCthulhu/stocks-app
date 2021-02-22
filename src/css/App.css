@@ -1,3 +1,7 @@
+html {
+    overflow-y: scroll;
+}
+
 .loader {
     border-top: 16px solid #00000b;
     border-right: 16px solid #f6f3f0;
